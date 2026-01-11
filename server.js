@@ -17,6 +17,28 @@ app.get("/",(req,res)=>{
 
 app.use('/about',router)
 //advance routing
+app.use(express.json())
+
+app.post("/users",(req,res)=>{
+    const {name,email}=req.body;
+    res.json({
+        message:`Hi ${name} my email is: ${email}`
+    })
+})
+app.put("/users/:id",(req,res)=>{
+    const userId=req.params.id;
+    const {name,email}=req.body;
+    res.json({
+        message:`The name ${userId} updated to ${name} with email ${email}`
+    })
+})
+app.delete("/users/:id",(req,res)=>{
+    const userId=req.params.id;
+    res.json({
+        message:`The user with id ${userId} is successfully deleted`
+    })
+})
+
 
 app.listen(port,()=>{
     console.log(`Server running on http://localhost:${port}`);
