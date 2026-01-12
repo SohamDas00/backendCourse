@@ -38,6 +38,9 @@ app.use((err,req,res,next)=>{
 })
 //error handeling using middleware
 
+app.use(express.static("public"))
+//extract static file
+
 app.post("/users",(req,res)=>{
     const {name,email}=req.body;
     res.json({
