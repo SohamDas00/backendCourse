@@ -10,20 +10,33 @@ const app=express()
 const port=process.env.PORT;
 //connect port from dotenv
 
-app.use((req,res,next)=>{
+app.use('/middleware',(req,res,next)=>{
     console.log(`Request send from client ${Date.now()}`);
     next();
-    
 })
+//Middleware apply for route /middleware
 
 app.get("/",(req,res)=>{
     res.send("ExpressJS running")
+})
+app.get("/middleware",(req,res)=>{
+    res.send("Middleware running")
 })
 //basic routing 
 
 app.use('/about',router)
 //advance routing
 app.use(express.json())
+//buildIn middleware
+
+app.get('/error',(req,res)=>{
+    throw new Error("This is test error");
+})
+app.use((err,req,res,next)=>{
+    console.error(err.message)
+    res.send("This is a ERROR")
+})
+//error handeling using middleware
 
 app.post("/users",(req,res)=>{
     const {name,email}=req.body;
