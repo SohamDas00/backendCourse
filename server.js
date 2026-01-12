@@ -10,6 +10,12 @@ const app=express()
 const port=process.env.PORT;
 //connect port from dotenv
 
+app.use((req,res,next)=>{
+    console.log(`Request send from client ${Date.now()}`);
+    next();
+    
+})
+
 app.get("/",(req,res)=>{
     res.send("ExpressJS running")
 })
