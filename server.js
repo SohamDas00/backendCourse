@@ -84,7 +84,7 @@ app.delete("/users/:id",(req,res)=>{
         message:`The user with id ${userId} is successfully deleted`
     })
 })
-
+//controller CRUD
 
 app.listen(port,()=>{
     console.log(`Server running on http://localhost:${port}`);
