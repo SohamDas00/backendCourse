@@ -41,6 +41,30 @@ app.use((err,req,res,next)=>{
 app.use(express.static("public"))
 //extract static file
 
+app.get('/products',(req,res)=>{
+    const products=[
+        {id:1,name:'Laptop',cost:10000},
+        {id:2,name:'mobile',cost:5000},
+    ]
+    res.status(200).json({products})
+})
+app.get('/products/:id',(req,res)=>{
+    const products=[
+        {id:1,name:'Laptop',cost:10000},
+        {id:2,name:'mobile',cost:5000},
+    ]
+    const product=products.find(p=>p.id===Number(req.params.id))
+    if(!product){
+        res.status(404).send("Product not found!")
+    }
+    res.status(200).json(product)
+})
+app.post('/products',(req,res)=>{
+    const newProduct=req.body;
+    res.status(201).json(newProduct)
+})
+//restful API
+
 app.post("/users",(req,res)=>{
     const {name,email}=req.body;
     res.json({
